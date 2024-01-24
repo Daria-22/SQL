@@ -1,0 +1,40 @@
+/*Write a findUser function that finds a user by their ID, returning the result (an array of objects) that comes back from the database. 
+Use a bind parameter (?) to provide the ID to the query. Remember that the ID needs to be passed in an array!*/
+
+exec(`CREATE TABLE users (id INTEGER NOT NULL, name TEXT)`);
+exec(`INSERT INTO users (id, name) VALUES (1, 'Amir')`);
+exec(`INSERT INTO users (id, name) VALUES (2, 'Betty')`);
+exec(`INSERT INTO users (id, name) VALUES (3, 'Betty')`);
+
+function findUser(id) {
+  return exec(`SELECT * FROM users WHERE id = ?`, [id])}
+
+[findUser(1), findUser(2), findUser(100)];
+
+/*for two parameters 
+*/
+exec(
+  `SELECT * FROM users WHERE id = ? AND name = ?`,
+  [1, 'Amir']
+);
+/*RESULT:
+[{id: 1, name: 'Amir'}] */
+
+
+/* one more*/
+exec(`CREATE TABLE users (id INTEGER NOT NULL, name TEXT)`);
+exec(`INSERT INTO users (id, name) VALUES (1, 'Amir')`);
+exec(`INSERT INTO users (id, name) VALUES (2, 'Betty')`);
+exec(`INSERT INTO users (id, name) VALUES (3, 'Betty')`);
+function findUser(id) {
+  const queryResult = exec(`SELECT * FROM users WHERE id = ?`, [id]);
+  if (queryResult.length === 0) {
+    return null;
+  } else {
+    return queryResult[0];
+  }
+}
+
+
+[findUser(1), findUser(2), findUser(100)];
+/* result  [{id: 1, name: 'Amir'}, {id: 2, name: 'Betty'}, null] */
