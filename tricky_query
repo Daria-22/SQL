@@ -1,0 +1,11 @@
+/*Select two values from the cats table. First: the cats' names, with " the cat" appended to each. 
+Second: is_3_years_old, a boolean (represented as 0 or 1 in SQLite). 
+Remember that equality comparison in SQL is =, not == or ===.*/
+
+exec(`CREATE TABLE cats (name TEXT, age INTEGER)`);
+exec(`INSERT INTO cats (name, age) VALUES ('Ms. Fluff', 3)`);
+exec(`INSERT INTO cats (name, age) VALUES ('Keanu', 2)`);
+exec(`SELECT name || ' the cat' AS name, age = 3 AS is_3_years_old FROM cats `);
+
+
+/*[{name: 'Ms. Fluff the cat', is_3_years_old: 1}, {name: 'Keanu the cat', is_3_years_old: 0}] */
