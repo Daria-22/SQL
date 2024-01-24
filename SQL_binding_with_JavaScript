@@ -1,0 +1,13 @@
+exec(`CREATE TABLE users (id INTEGER NOT NULL, name TEXT)`);
+exec(`INSERT INTO users (id, name) VALUES (1, 'Amir')`);
+exec(`INSERT INTO users (id, name) VALUES (2, 'Betty')`);
+exec(`INSERT INTO users (id, name) VALUES (3, 'Cindy')`);
+
+const users = exec(`SELECT name FROM users WHERE id = ?`, [2]);
+const user = users[0];
+user.name;
+
+/*RESULT:
+'Betty'
+instead of using the 2, it is indicated as a '?' and then after comma, in [] - the data we look for
+*/
