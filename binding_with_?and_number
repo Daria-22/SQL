@@ -1,0 +1,22 @@
+
+exec(`CREATE TABLE cats (name TEXT, owner_name TEXT)`);
+exec(`INSERT INTO cats (name, owner_name) VALUES ('Ms. Fluff', 'Amir')`);
+exec(`INSERT INTO cats (name, owner_name) VALUES ('Wilford', 'Wilford')`);
+exec(`SELECT name FROM cats WHERE name = ?1 AND owner_name = ?1`, ['Wilford']); //in PostgeSQL $1
+
+
+
+/* the same as
+exec(`CREATE TABLE cats (name TEXT, owner_name TEXT)`);
+exec(`INSERT INTO cats (name, owner_name) VALUES ('Ms. Fluff', 'Amir')`);
+exec(`INSERT INTO cats (name, owner_name) VALUES ('Wilford', 'Wilford')`);
+exec(`SELECT name FROM cats WHERE name = owner_name`);
+RESULT:
+[{name: 'Wilford'}]
+*/
+
+
+/* The query execution function also varies between different databases.
+In this course, we execute queries with exec(query, bindParameters), which is a function that we (the course authors) 
+defined while writing the course. 
+In Node's PostgreSQL API, the equivalent function is called query. In Python's SQLite API, it's called execute.*/
