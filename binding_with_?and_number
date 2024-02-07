@@ -4,6 +4,18 @@ exec(`INSERT INTO cats (name, owner_name) VALUES ('Ms. Fluff', 'Amir')`);
 exec(`INSERT INTO cats (name, owner_name) VALUES ('Wilford', 'Wilford')`);
 exec(`SELECT name FROM cats WHERE name = ?1 AND owner_name = ?1`, ['Wilford']); //in PostgeSQL $1
 
+/* 
+exec(`CREATE TABLE users (id INTEGER NOT NULL, name TEXT)`);
+exec(`INSERT INTO users (id, name) VALUES (1, 'Amir')`);
+exec(`INSERT INTO users (id, name) VALUES (2, 'Betty')`);
+exec(`INSERT INTO users (id, name) VALUES (3, 'Cindy')`);
+
+const users = exec(`SELECT name FROM users WHERE id = ?`, [2]);
+const user = users[0];
+user.name;
+//RESULT:
+//'Betty'
+*/
 
 
 /* the same as
