@@ -1,0 +1,35 @@
+exec(`CREATE TABLE users (email TEXT, name TEXT)`);
+exec(`INSERT INTO users (email, name) VALUES ('amir@example.com', 'Amir')`);
+exec(`INSERT INTO users (email, name) VALUES ('betty.j@example.com', 'Betty')`);
+exec(`DELETE FROM users`);
+exec(`SELECT name FROM users`);
+RESULT:
+[]
+
+
+exec(`CREATE TABLE users (email TEXT, name TEXT)`);
+exec(`INSERT INTO users (email, name) VALUES ('amir@example.com', 'Amir')`);
+exec(`INSERT INTO users (email, name) VALUES ('betty.j@example.com', 'Betty')`);
+exec(`DELETE FROM users WHERE name = 'Betty'`);
+exec(`SELECT name FROM users`);
+RESULT:
+[{name: 'Amir'}]
+
+exec(`
+  CREATE TABLE users (email TEXT, name TEXT);
+  INSERT INTO users (email, name)
+    VALUES ('amir@example.com', 'Amir');
+  INSERT INTO users (email, name)
+    VALUES ('betty.j@example.com', 'Betty');
+  INSERT INTO users (email, name)
+    VALUES ('betty.k@example.com', 'Betty');
+  INSERT INTO users (email, name)
+    VALUES ('cindy@example.com', 'Cindy');
+`);
+exec(`
+  DELETE FROM users 
+  WHERE name == 'Amir' OR name == 'Betty'
+    `);
+exec(`SELECT name FROM users`);
+     RESULT:
+[{name: 'Cindy'}]
