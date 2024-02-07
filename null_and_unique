@@ -1,0 +1,14 @@
+exec(`CREATE TABLE users (email TEXT NULL UNIQUE)`);
+exec(`INSERT INTO users (email) VALUES (NULL)`);
+exec(`INSERT INTO users (email) VALUES (NULL)`);
+exec(`SELECT * FROM users`);
+//RESULT:
+//[{email: null}, {email: null}]
+
+
+
+exec(`CREATE TABLE users (email TEXT NULL UNIQUE)`);
+exec(`INSERT INTO users (email) VALUES ('amir@example.com')`);
+exec(`INSERT INTO users (email) VALUES ('amir@example.com')`);
+//RESULT:
+//Error: UNIQUE constraint failed: users.email
