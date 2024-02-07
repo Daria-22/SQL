@@ -1,0 +1,8 @@
+function findUser(id) {
+  const queryResult = exec(`SELECT * FROM users WHERE id = ?`, [id]);
+  if (queryResult.length === 0) {
+    return null;
+  } else {
+    return queryResult[0];
+  }
+}
