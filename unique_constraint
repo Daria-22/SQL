@@ -1,0 +1,10 @@
+exec(`CREATE TABLE cats (
+    name TEXT NOT NULL,
+    owner_name TEXT NOT NULL,
+    UNIQUE (name, owner_name)
+  )
+`);
+exec(`INSERT INTO cats (name, owner_name) VALUES ('Ms. Fluff', 'Amir')`);
+exec(`INSERT INTO cats (name, owner_name) VALUES ('Ms. Fluff', 'Amir')`);
+
+//RESULT: Error: UNIQUE constraint failed: cats.name, cats.owner_name
