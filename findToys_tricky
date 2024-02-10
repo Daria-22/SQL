@@ -1,0 +1,26 @@
+exec(`
+  CREATE TABLE cats (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+  CREATE TABLE toys (cat_id INTEGER NOT NULL, name TEXT NOT NULL);
+  INSERT INTO cats (name) VALUES ('Ms. Fluff');
+  INSERT INTO cats (name) VALUES ('Keanu');
+  INSERT INTO toys (cat_id, name) VALUES (1, 'Birdo');
+  INSERT INTO toys (cat_id, name) VALUES (2, 'Mouser');
+`);
+const catsIds = exec(`SELECT id FROM cats WHERE name = ?`, [catName]);
+    
+    catsIds.forEach(catIdObject => {
+        const catId = catIdObject.id;
+        const toysForCat = exec(`SELECT name FROM toys WHERE cat_id = ?`, [catId]);
+        
+        toysForCat.forEach(toyObject => {
+            const toyName = toyObject.name;
+            allToyNames.push(toyName);
+        });
+    });
+    
+    return allToyNames;
+}
+
+findToys('Ms. Fluff');
+GOAL:
+['Birdo']
