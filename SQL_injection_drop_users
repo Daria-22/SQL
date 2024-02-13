@@ -1,0 +1,6 @@
+const email = "'); DROP TABLE users; --";
+const combined = "INSERT INTO users (email) VALUES ('" + email + "')";
+
+combined;
+RESULT:
+"INSERT INTO users (email) VALUES (''); DROP TABLE users; --')"
