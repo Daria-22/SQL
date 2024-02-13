@@ -1,0 +1,5 @@
+exec(`CREATE TABLE users (email TEXT UNIQUE);`);
+exec(`INSERT INTO users (email) VALUES (''); DROP TABLE users; --');`);
+exec(`SELECT * FROM users;`);
+RESULT:
+Error: no such table: users
