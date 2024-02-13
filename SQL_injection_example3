@@ -9,3 +9,7 @@ register("'); DROP TABLE users; --");
 exec(`SELECT * FROM users`);
 RESULT:
 Error: no such table: users
+
+/* finally explanation:
+The key to this attack is 
+the quote (') that closes the string in our INSERT. After that point, the rest of the user's "email address" string is executed as SQL code.
