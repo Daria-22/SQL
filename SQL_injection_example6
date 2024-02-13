@@ -15,3 +15,9 @@ exec(`SELECT * FROM users`);
 
 /* 
 register(   "    attacker@example.com'); UPDATE users SET admin = 1 WHERE email = 'attacker@example.com';--      ");
+
+SQL injection attacks are subtle, but the practical takeaway from this lesson is simple. 
+Never concatenate SQL strings, even if it seems safe. Write your SQL in a single, self-contained string. If you need to pass 
+dynamic data to your INSERTs, SELECTs, etc., use bind parameters. 
+Bind parameters are carefully implemented by the database authors to inject values securely
+*/
