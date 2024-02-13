@@ -15,4 +15,7 @@ The key to this attack is
 the quote (') that closes the string in our INSERT. After that point, the rest of the user's "email address" string is executed as SQL code.
 This technique is one of the most common security exploits on the Internet. It's called a "SQL injection attack" because the attacker injects
 their own SQL code into our database query. That makes this the most important lesson in this SQL course!
-*/
+
+One interesting question about the attack string: why is there a comment (--) at the end? Because otherwise there would be a dangling ') 
+at the end of the combined SQL string, 
+causing a syntax error in the SQL. The attacker adds the comment to prevent that syntax error, which would stop their attack code from running.*/
