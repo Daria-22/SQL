@@ -1,0 +1,11 @@
+exec(`CREATE TABLE users (email TEXT UNIQUE)`);
+
+function register(email) {
+  exec(`INSERT INTO users (email) VALUES ('` + email + `')`);
+}
+
+register("'); DROP TABLE users; --");
+
+exec(`SELECT * FROM users`);
+RESULT:
+Error: no such table: users
