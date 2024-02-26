@@ -1,0 +1,9 @@
+exec(`
+  CREATE TABLE people (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+  CREATE TABLE cats (
+    owner_id INTEGER REFERENCES people(id),
+    name TEXT NOT NULL
+  );
+`);
+RESULT:
+[]
