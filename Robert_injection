@@ -1,0 +1,10 @@
+exec(`CREATE TABLE students (name TEXT)`);
+
+function register(name) {
+  exec(`INSERT INTO students (name) VALUES ('` + name + `')`);
+}
+
+register("Robert'); DROP TABLE students; --"
+         );
+
+exec(`SELECT * FROM students`);
