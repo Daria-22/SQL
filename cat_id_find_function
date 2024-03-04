@@ -1,0 +1,43 @@
+exec(`
+  CREATE TABLE cats (id INTEGER PRIMARY KEY, name TEXT NOT NULL);
+  CREATE TABLE toys (cat_id INTEGER NOT NULL, name TEXT NOT NULL);
+  INSERT INTO cats (name) VALUES ('Ms. Fluff');
+  INSERT INTO cats (name) VALUES ('Keanu');
+  INSERT INTO toys (cat_id, name) VALUES (1, 'Birdo');
+  INSERT INTO toys (cat_id, name) VALUES (2, 'Mouser');
+`);
+
+function findToys(catName) {
+  const allToyNames = [];
+  const cats = exec(`SELECT id FROM cats WHERE name = ?`, [catName]);
+  for (const cat of cats) {
+    const toys = exec(`SELECT name FROM toys WHERE cat_id = ?`, [cat.id]);
+    for (const toy of toys) {
+      allToyNames.push(toy.name);
+    }
+  }
+  return allToyNames;
+}
+
+findToys('Ms. Fluff');
+
+Explanation for myself 
+
+1. create the tables : 
+cats and toys, both have cat_id: cat_id and name in CATS AND cat_if and name in TOYS
+
+2. create allToysNames for later use
+
+3. create cats,  it will be filled with cat's id which is in the function argument, it will be the result of query - 
+exec(`SELECT id FROM cats WHERE name = ?`, [catName]); 
+
+4. then we iterate through the list if id of cats, take the id and if the id in cats matches id in toys, then the toy variable is getting this toys value
+This query is a bound query, it is bound to the cat id. 
+const toys = exec(`SELECT name FROM toys WHERE cat_id = ?`, [cat.id]);
+it is an array
+
+5. Then we turn this array, and for each object in toys we take this object and add it ti allToys list
+for (const toy of toys) {
+      allToyNames.push(toy.name);
+
+6. finally we return  allToyNames;
