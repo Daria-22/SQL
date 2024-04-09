@@ -1,0 +1,23 @@
+exec
+(`
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+  );
+  CREATE TABLE deactivations (
+    user_id INTEGER UNIQUE REFERENCES users(id),
+    date TEXT NOT NULL
+  );
+  INSERT INTO users (name) VALUES ('Amir');
+  INSERT INTO deactivations (user_id, date) VALUES (1, '2025-10-03');
+  INSERT INTO deactivations (user_id, date) VALUES (1, '2025-10-22')
+
+ON CONFLICT (user_id) DO NOTHING
+`);
+exec(`SELECT * FROM deactivations`);
+
+/*GOAL:
+[{user_id: 1, date: '2025-10-03'}]
+YOURS:
+[{user_id: 1, date: '2025-10-03'}]
+*/
