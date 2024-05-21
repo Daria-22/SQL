@@ -1,0 +1,35 @@
+>
+exec(`
+  CREATE TABLE visits (
+    id INTEGER PRIMARY KEY,
+    -- email is unique because we only want one row per person
+    email TEXT UNIQUE NOT NULL,
+    count INTEGER NOT NULL
+  )
+`);
+
+function visit(email) {
+  const visits = exec(
+    `SELECT * FROM visits WHERE email = ?`,
+    [email]
+  );
+
+  if (visits.length === 0) {
+    exec(
+      `INSERT INTO visits (email, count) VALUES (?, ?)`,
+      [email, 1]
+    );
+  } else {
+    const visit = visits[0];
+    exec(
+      `UPDATE visits SET count = ? WHERE id = ?`,
+      [visit.count + 1, visit.id]
+    );
+  }
+}
+
+visit('amir@example.com');
+visit('amir@example.com');
+exec(`SELECT email, count FROM visits`);
+RESULT:
+[{email: 'amir@example.com', count: 2}]
