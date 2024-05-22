@@ -25,3 +25,11 @@ GOAL:
 [{email: 'amir@example.com', count: 1}, {email: 'betty@example.com', count: 2}]
 YOURS:
 [{email: 'amir@example.com', count: 1}, {email: 'betty@example.com', count: 2}]
+
+
+This is a genius decision!
+The new version of visit fixes the race condition bug while being simpler than the original. There's no conditional in the JavaScript, 
+and we've replaced a trio of SELECT/INSERT/UPDATE statements with a single INSERT ... ON CONFLICT statement.
+
+The new version is also more efficient. Our original version had to retrieve the visits count from the database, 
+then make a decision, then go back to the database again to create or update the visits row. The new version is a single statement that hits the database only once.
