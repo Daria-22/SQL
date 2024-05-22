@@ -1,0 +1,27 @@
+exec(`
+  CREATE TABLE visits (
+    id INTEGER PRIMARY KEY,
+    -- email is unique because we only want one row per person
+    email TEXT UNIQUE NOT NULL,
+    count INTEGER NOT NULL
+  )
+`);
+
+function visit(email) {
+  exec(
+    ` INSERT INTO visits (email, count) VALUES (?, 1)
+      ON CONFLICT (email) DO UPDATE SET count = count +1
+   `,
+    [email]
+  );
+}
+
+visit('amir@example.com');
+visit('betty@example.com');
+visit('betty@example.com');
+exec(`SELECT email, count FROM visits`);
+
+GOAL:
+[{email: 'amir@example.com', count: 1}, {email: 'betty@example.com', count: 2}]
+YOURS:
+[{email: 'amir@example.com', count: 1}, {email: 'betty@example.com', count: 2}]
